@@ -1,0 +1,31 @@
+# Navidrome Configuration File
+
+# Music folder - where your music files are stored
+MusicFolder = "/music"
+
+# Data folder - where Navidrome stores its database and cache
+DataFolder = "/data"
+
+# Port to bind the server (Render requires this to be from PORT env var)
+Port = "${PORT}"
+
+# Log level
+LogLevel = "info"
+
+# Scanner settings to reduce unnecessary scans
+ScanSchedule = "@every 24h"
+
+# Disable automatic scanning on startup
+AutoImportPlaylists = true
+
+# Database - Navidrome uses SQLite by default (stored in DataFolder)
+# No additional database server needed
+
+# Session timeout
+SessionTimeout = "24h"
+
+# Enable transcoding (optional)
+EnableTranscodingConfig = true
+
+# Reduce resource usage
+Scanner.Extractor = "taglib"
