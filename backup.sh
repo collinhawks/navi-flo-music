@@ -1,6 +1,24 @@
 #!/bin/bash
 set -e
 
+# Ensure rclone config exists from base64
+mkdir -p ~/.config/rclone
+if [ ! -z "$RCLONE_CONFIG_BASE64" ]; then
+    echo "Decoding base64 rclone config for backup..."
+    echo "$RCLONE_CONFIG_BASE64" | base64 -d > ~/.config/rclone/rclone.conf
+else
+    echo "ERROR: RCLONE_CONFIG_BASE64 is not set"
+    exit 1
+fi
+
+# Verify config file
+if [ ! -f ~/.config/rclone/rclone.conf ]; then
+    echo "ERROR: Failed to create rclone config file"
+    exit 1
+fi
+
+echo "Rclone config ready: $(wc -c < ~/.config/rclone/rclone.conf) bytes"
+
 echo "Starting backup process..."
 
 TIMESTAMP=$(date +%Y%m%d_%H%M%S)
