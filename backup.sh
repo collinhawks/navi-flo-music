@@ -28,6 +28,10 @@ if [ -d "/data" ]; then
         echo "Removing old backup: $dir"
         rclone purge "remote:navi/navi-backup/backups/$dir"
     done
+
+    # ✅ Create marker that backup finished
+    touch /tmp/.backup_done
+    rclone --config ~/.config/rclone/rclone.conf copy /tmp/.backup_done remote:navi/navi-backup/data/
 else
     echo "No data directory found to backup"
 fi
