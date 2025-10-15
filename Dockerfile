@@ -11,8 +11,12 @@ COPY entrypoint.sh /scripts/entrypoint.sh
 COPY backup.sh /scripts/backup.sh
 COPY restore.sh /scripts/restore.sh
 
-# Make scripts executable
-RUN chmod +x /scripts/*.sh
+# Copy navidrome.toml into /data
+COPY navidrome.toml /data/navidrome.toml
+
+# Make scripts executable and fix permissions for navidrome.toml
+RUN chmod +x /scripts/*.sh \
+    && chown navidrome:navidrome /data/navidrome.toml
 
 # Set working directory
 WORKDIR /app
