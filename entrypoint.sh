@@ -38,7 +38,7 @@ NAV_PID=$!
 # First user detection & initial backup
 # -------------------------
 echo "Waiting for first admin user..."
-while ! sqlite3 /data/navidrome.db "SELECT COUNT(*) FROM users;" | grep -q '[1-9]'; do
+while ! sqlite3 /data/navidrome.db "SELECT COUNT(*) FROM user;" | grep -q '[1-9]'; do
     sleep 5
 done
 
