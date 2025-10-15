@@ -16,17 +16,17 @@ if [ -d "/data" ]; then
     
     # Upload to cloud storage
     echo "Uploading backup to cloud..."
-    rclone sync "$BACKUP_DIR/data" remote:navidrome-backup/data --progress
+    rclone sync "$BACKUP_DIR/data" remote:navi-backup/data --progress
     
     # Keep last 3 timestamped backups for safety
-    rclone copy "$BACKUP_DIR/data" "remote:navidrome-backup/backups/$TIMESTAMP" --progress
+    rclone copy "$BACKUP_DIR/data" "remote:navi-backup/backups/$TIMESTAMP" --progress
     
     echo "Backup completed successfully"
     
     # Cleanup old backups (keep last 3)
-    rclone lsf remote:navidrome-backup/backups --dirs-only | sort -r | tail -n +4 | while read dir; do
+    rclone lsf remote:navi-backup/backups --dirs-only | sort -r | tail -n +4 | while read dir; do
         echo "Removing old backup: $dir"
-        rclone purge "remote:navidrome-backup/backups/$dir"
+        rclone purge "remote:navi-backup/backups/$dir"
     done
 else
     echo "No data directory found to backup"
