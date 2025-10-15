@@ -15,8 +15,7 @@ COPY restore.sh /scripts/restore.sh
 COPY navidrome.toml /data/navidrome.toml
 
 # Make scripts executable and fix permissions for navidrome.toml
-RUN chmod +x /scripts/*.sh \
-    && chown navidrome:navidrome /data/navidrome.toml
+RUN chmod +x /scripts/*.sh
 
 # Set working directory
 WORKDIR /app
