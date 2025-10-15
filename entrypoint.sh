@@ -37,7 +37,7 @@ if ! rclone --config ~/.config/rclone/rclone.conf lsd remote: --max-depth 1 2>&1
 fi
 echo "Rclone connection successful"
 
-# Check if this is first run (marker file doesn't exist in cloud)
+# Check if this is first run or if previous backup is incomplete
 FIRST_RUN=false
 if ! rclone --config ~/.config/rclone/rclone.conf ls remote:navi/navi-backup/data/.initialized > /dev/null 2>&1; then
     echo "First run detected - no backup found"
@@ -45,6 +45,9 @@ if ! rclone --config ~/.config/rclone/rclone.conf ls remote:navi/navi-backup/dat
     # Create marker file
     touch /tmp/.initialized
     rclone --config ~/.config/rclone/rclone.conf copy /tmp/.initialized remote:navi/navi-backup/data/
+elif ! rclone --config ~/.config/rclone/rclone.conf ls remote:navi/navi-backup/data/.backup_done > /dev/null 2>&1; then
+    echo "Previous backup incomplete - skipping restore"
+    FIRST_RUN=true  # Treat as first run to avoid restoring incomplete backup
 else
     echo "Previous backup found - restoring data"
     /scripts/restore.sh
