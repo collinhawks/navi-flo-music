@@ -28,10 +28,17 @@ echo "Rclone connection successful"
 echo "Syncing music library from cloud..."
 rclone --config ~/.config/rclone/rclone.conf sync remote:navi/navi-music /music --transfers 8 --checkers 16 --progress
 
+# -------------------------
+# Restore database if missing
+# -------------------------
+if [ ! -f /data/navidrome.db ]; then
+    echo "Database not found, restoring from cloud backup..."
+    rclone --config ~/.config/rclone/rclone.conf sync remote:navi/navi-backup/data /data --progress
+fi
+
 # Start Navidrome in background
 echo "Starting Navidrome..."
 /app/navidrome --configfile /data/navidrome.toml &
-
 NAV_PID=$!
 
 # -------------------------
