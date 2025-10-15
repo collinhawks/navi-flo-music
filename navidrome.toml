@@ -29,3 +29,8 @@ EnableTranscodingConfig = true
 
 # Reduce resource usage
 Scanner.Extractor = "taglib"
+
+# --------------------------
+# Admin API key (for /api/* endpoints)
+# --------------------------
+ApiKey = "your-random-long-string"
