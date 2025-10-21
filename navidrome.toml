@@ -9,6 +9,8 @@ DataFolder = "/data"
 # Port to bind the server (Render requires this to be from PORT env var)
 Port = "${PORT}"
 
+ArtistArtPriority = "folder.*, artist.*, album/artist.*, external"
+
 # Log level
 LogLevel = "info"
 
