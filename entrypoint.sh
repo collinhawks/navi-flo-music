@@ -36,6 +36,16 @@ if [ ! -f /data/navidrome.db ]; then
     rclone --config ~/.config/rclone/rclone.conf sync remote:navi/navi-backup/data /data --progress
 fi
 
+# -------------------------
+# Override Navidrome placeholder image from repo
+# -------------------------
+if [ -f /app/album-placeholder.webp ]; then
+    echo "Replacing default album placeholder from repo..."
+    cp /app/album-placeholder.webp /app/resources/album-placeholder.webp
+else
+    echo "Custom album placeholder not found at /githubrepo/album-placeholder.webp"
+fi
+
 # Start Navidrome in background
 echo "Starting Navidrome..."
 /app/navidrome --configfile /data/navidrome.toml &
