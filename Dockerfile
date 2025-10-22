@@ -11,13 +11,16 @@ COPY entrypoint.sh /scripts/entrypoint.sh
 COPY backup.sh /scripts/backup.sh
 COPY restore.sh /scripts/restore.sh
 
-# Copy navidrome.toml into /data
-COPY navidrome.toml /data/navidrome.toml
+## Copy navidrome.toml into /data
+#COPY navidrome.toml /data/navidrome.toml
+
+# Copy navidrome.toml to /app (not /data, since /data is a volume)
+COPY navidrome.toml /app/navidrome.toml
 
 # Copy the custom placeholder image to the location checked by entrypoint.sh
 COPY album-placeholder.webp /app/album-placeholder.webp
 
-# Make scripts executable and fix permissions for navidrome.toml
+# Make scripts executable
 RUN chmod +x /scripts/*.sh
 
 # Set working directory
