@@ -41,6 +41,7 @@ ApiKey = "your-random-long-string"
 ND_COVERARTPRIORITY = "embedded, cover.*, folder.*, front.*, external"
 
 # Access the images more directly. How quickly album art is displayed.
-ND_DEVFASTACCESSCOVERART = true
+# Wasnt a big fan of the performance ?
+#ND_DEVFASTACCESSCOVERART = true
 
 UILoginBackgroundUrl="https://images.unsplash.com/photo-1646038572815-43fe759e459b?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=774"
