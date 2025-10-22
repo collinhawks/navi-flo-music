@@ -41,9 +41,11 @@ fi
 # -------------------------
 if [ -f /app/album-placeholder.webp ]; then
     echo "Replacing default album placeholder from repo..."
+# CREATE the directory just in case it's not ready yet
+    mkdir -p /app/resources/
     cp /app/album-placeholder.webp /app/resources/album-placeholder.webp
 else
-    echo "Custom album placeholder not found at /githubrepo/album-placeholder.webp"
+    echo "Custom album placeholder not found at /app/resources/album-placeholder.webp"
 fi
 
 # Start Navidrome in background
