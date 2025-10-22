@@ -29,6 +29,15 @@ echo "Syncing music library from cloud..."
 rclone --config ~/.config/rclone/rclone.conf sync remote:navi/navi-music /music --transfers 8 --checkers 16 --progress
 
 # -------------------------
+# Copy navidrome.toml from image to data volume if it doesn't exist or force update
+# -------------------------
+if [ -f /app/navidrome.toml ]; then
+    echo "Copying navidrome.toml from repo to /data..."
+    cp /app/navidrome.toml /data/navidrome.toml
+    echo "navidrome.toml updated from repository"
+fi
+
+# -------------------------
 # Restore database if missing
 # -------------------------
 if [ ! -f /data/navidrome.db ]; then
